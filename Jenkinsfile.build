@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    options {
+        ansiColor colorMapName: 'XTerm'
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+	
+	stage('Build') {
+            steps {
+                // Building the Hello World program (This could be a compilation command)
+                sh 'cd your-hello-world-repo && make'
+            }
+        }
+}
