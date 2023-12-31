@@ -1,23 +1,17 @@
 pipeline {
-    agent {
-        label 'docker && build'
-    }
-    options {
-        ansiColor colorMapName: 'XTerm'
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-    }
-   
-    triggers{
-        upstream( 
-            threshold: hudson.model.Result.SUCCESS,
-            upstreamProjects: "/fr-payment-batch-build-d/" 
-        )
-    }
+   agent any
+   triggers { 
+     upstream(
+      threshold: hudson.model.Result.SUCCESS,
+      upstreamProjects: "fr-payment-batch-build"
+	  )
+	  }
 	
-	stage('Build') {
-            steps {
-                // Building the Hello World program (This could be a compilation command)
-                sh 'cd your-hello-world-repo && make'
-            }
-        }
-}
+	  stages {
+	       stage('hello') {
+		      steps {
+			      echo 'hello world'
+				 }
+			}
+		}
+	}
