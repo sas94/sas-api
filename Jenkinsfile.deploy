@@ -10,12 +10,8 @@ pipeline {
 def getUpstreamProjects() {
     def upstreamProjects = ["/fr-payment-batch-build/${env.BRANCH_NAME.replaceAll("/", "%2F")}"]
 
-    // Check if the build was triggered by a tag
     if (env.CHANGE_ID && env.CHANGE_ID.startsWith('refs/tags/')) {
-        // Extract tag name from CHANGE_ID
         def tagName = env.CHANGE_ID.replaceAll('refs/tags/', '')
-        
-        // Add the tag-specific project to the list
         upstreamProjects << "/fr-payment-batch-build/tag-${tagName.replaceAll('/', '%2F')}"
     }
 
