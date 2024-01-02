@@ -3,7 +3,7 @@ pipeline {
    triggers { 
      upstream(
       threshold: hudson.model.Result.SUCCESS,
-      upstreamProjects: "/fr-payment-batch-build/${env.CHANGE_ID.replaceAll('refs/tags/', '').replaceAll('/', '%2F')}"
+      upstreamProjects: "/fr-payment-batch-build/" + env.BRANCH_NAME.replaceAll("/", "%2F")
 	  )
 	  }
 
